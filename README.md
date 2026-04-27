@@ -1,85 +1,77 @@
 # SafeReceipt: Digital E-Warranty Vault 🛡️
 
 [![Project Demo](https://img.shields.io/badge/Demo-Video-blueviolet?style=for-the-badge&logo=youtube)](demo_video_246.mp4)
+[![Flutter](https://img.shields.io/badge/Flutter-3.41.6-blue?logo=flutter)](https://flutter.dev)
+[![Firebase](https://img.shields.io/badge/Firebase-Integrated-orange?logo=firebase)](https://firebase.google.com)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-SafeReceipt adalah solusi manajemen aset digital yang dirancang untuk mendigitalisasi struk fisik dan mengelola masa garansi secara cerdas. Proyek ini dikembangkan sebagai Mini Project mata kuliah Pemrograman Perangkat Bergerak (ITS).
-
----
-
-### 📺 Video Demo
-Anda dapat melihat demo lengkap fitur aplikasi langsung di dalam repositori ini:
-👉 **[Lihat Video Demo (demo_video_246.mp4)](demo_video_246.mp4)**
+**SafeReceipt** adalah aplikasi manajemen aset digital yang dirancang untuk mendigitalisasi struk fisik dan mengelola masa garansi secara cerdas. Proyek ini dikembangkan guna memenuhi persyaratan **Mini Project mata kuliah Pemrograman Perangkat Bergerak**.
 
 ---
 
-SafeReceipt is a mobile utility designed to bridge the gap between physical receipts and digital asset management. Built for the **Mobile Programming Mini Project**, this application serves as a secure vault for digitizing thermal receipts and tracking warranty periods to prevent loss of claims due to faded or lost physical documents.
+## 📺 Project Demo
+Demo lengkap fitur aplikasi dapat dilihat pada file berikut:
+👉 **[Tonton Video Demo (demo_video_246.mp4)](demo_video_246.mp4)**
 
 ---
 
-## 📋 Project Requirements Fulfillment
+## 🎯 Pemenuhan Kriteria Tugas
+Aplikasi ini telah mengimplementasikan seluruh kriteria penilaian dengan rincian teknis sebagai berikut:
 
-This project is built to strictly adhere to the academic requirements while maintaining industry-standard practices:
-
-*   **Relational Database (CRUD)**: Utilizes **SQLite** (`sqflite`) for robust local persistence, handling the complete lifecycle of receipt data including complex date relations for warranty tracking.
-*   **Firebase Authentication**: Implements a secure user gateway with email/password authentication, ensuring that each user's vault is private and protected.
-*   **Firebase Cloud Integration**: 
-    *   **Cloud Firestore**: Real-time synchronization of receipt metadata across devices.
-    *   **Firebase Storage**: Secure cloud backup for high-resolution receipt images.
-*   **Local Notifications**: Implements an automated reminder system using `flutter_local_notifications` to alert users 30 days before a warranty expires.
-*   **Hardware Resource (Camera)**: Direct integration with the device camera to capture and digitize physical receipts on the spot.
-*   **Security & Best Practices**:
-    *   **Firebase Security Rules**: Implements strict data isolation to ensure users can only access their own files.
-    *   **Automated Testing**: Includes unit tests for core data models to ensure data integrity and stability.
-
+| Kriteria | Bobot | Implementasi Teknis | Status |
+| :--- | :---: | :--- | :---: |
+| **Relational Database (CRUD)** | 10% | Local persistence menggunakan **SQLite (sqflite)** dengan operasi Create, Read, Update, dan Delete yang lengkap. | ✅ |
+| **Firebase Authentication** | 5% | Sistem Login dan Register menggunakan **Firebase Auth** (Email & Password). | ✅ |
+| **Firebase Storing** | 5% | Sinkronisasi metadata ke **Cloud Firestore** dan penyimpanan foto struk ke **Firebase Storage**. | ✅ |
+| **Notifications** | 5% | Pengingat otomatis masa garansi (H-30) menggunakan **flutter_local_notifications**. | ✅ |
+| **Smartphone Resource** | 5% | Integrasi **Camera & Gallery** menggunakan paket `image_picker`. | ✅ |
+| **Demo & GitHub** | 10% | Repositori terstruktur rapi, kode bersih, dan video demo tersedia. | ✅ |
 
 ---
 
-## ✨ Features & User Experience
-
-*   **Smart Dashboard**: A clean overview of all stored assets with visual indicators for items nearing warranty expiration.
-*   **Digitization Engine**: Capture receipts instantly. The app handles local storage first to ensure functionality in low-signal areas, with background cloud sync.
-*   **Categorization**: Organize assets by category (Electronics, Appliances, Fashion, etc.) for easier management.
-*   **Automated Reminders**: Never miss a warranty claim. The app proactively calculates and schedules reminders based on your purchase and expiry dates.
-*   **Premium Dark Mode**: Full support for system-wide themes with a modern Material 3 aesthetic.
-
----
-
-## 🛠️ Technical Implementation
-
-The application architecture is designed for scalability and maintainability:
-
-*   **State Management**: Powered by **Provider**, ensuring a reactive UI and clean separation between business logic and the view layer.
-*   **Service Pattern**: Dedicated services for Database, Firebase, and Notifications to follow the Single Responsibility Principle.
-*   **Data Consistency**: Implements a "Local-First" strategy where data is committed to the SQLite database before attempting cloud synchronization, ensuring no data loss.
+## ✨ Fitur Unggulan
+Selain kriteria dasar, aplikasi ini dilengkapi dengan fitur tambahan untuk meningkatkan UX:
+- **Local-First with Auto-Sync**: Data tetap dapat diakses secara offline dan otomatis tersinkronisasi ke cloud saat koneksi internet kembali tersedia.
+- **Bulk Deletion**: Memungkinkan pengguna untuk menghapus banyak struk sekaligus dengan mode seleksi.
+- **Smart Search**: Pencarian cepat berdasarkan nama barang atau nama toko.
+- **Premium UI/UX**: Desain modern menggunakan Material 3 dengan animasi transisi *Hero* dan skema warna gelap yang elegan.
 
 ---
 
-## ⚙️ Quick Setup
-
-To run this project locally, ensure you have the Flutter SDK installed and follow these steps:
-
-1.  **Clone & Install**:
-    ```bash
-    git clone https://github.com/re1c/safe_receipt.git
-    cd safe_receipt
-    flutter pub get
-    ```
-
-2.  **Firebase Configuration**:
-    Since Firebase configuration is environment-specific, you will need to link your own Firebase project:
-    ```bash
-    flutterfire configure
-    ```
-    *Note: Ensure Authentication (Email), Firestore, and Storage are enabled in your Firebase console.*
-
-3.  **Run**:
-    ```bash
-    flutter run
-    ```
+## 🛠️ Tech Stack
+- **Framework**: Flutter (Stable Channel)
+- **State Management**: Provider (Clean Architecture)
+- **Local DB**: SQLite
+- **Cloud Backend**: Firebase (Auth, Firestore, Storage)
+- **Local Service**: Local Notifications, Camera, Connectivity Plus
 
 ---
 
-**Developed by:**  
+## 🚀 Cara Menjalankan Proyek
+1. **Clone repositori**:
+   ```bash
+   git clone git@github.com:re1c/safe_receipt.git
+   ```
+2. **Setup FVM** (jika menggunakan):
+   ```bash
+   fvm install && fvm use stable
+   ```
+3. **Install Dependencies**:
+   ```bash
+   flutter pub get
+   ```
+4. **Jalankan Aplikasi**:
+   ```bash
+   flutter run
+   ```
+
+---
+
+## 🛡️ Keamanan & Privasi
+Proyek ini mengimplementasikan **Firebase Security Rules** untuk memastikan setiap pengguna hanya dapat mengakses, mengubah, atau menghapus data milik mereka sendiri.
+
+---
+
 **Naswan Nashir Ramadhan**  
 NRP: 5025231246  
-*Department of Informatics, Institut Teknologi Sepuluh Nopember*
+*Departemen Teknik Informatika, Institut Teknologi Sepuluh Nopember*
