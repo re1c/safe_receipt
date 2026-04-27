@@ -1,0 +1,11 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /receipts/{receiptId} {
+      // Hanya user yang terautentikasi yang bisa akses
+      allow read, write: if request.auth != null && request.auth.uid == resource.data.userId;
+      // Untuk pembuatan data baru, pastikan userId sesuai dengan pengirim
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+    }
+  }
+}

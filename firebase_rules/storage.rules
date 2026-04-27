@@ -1,0 +1,9 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /receipts/{userId}/{allPaths=**} {
+      // User hanya bisa akses folder miliknya sendiri berdasarkan UID
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

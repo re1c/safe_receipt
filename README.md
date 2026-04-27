@@ -16,6 +16,10 @@ This project is built to strictly adhere to the academic requirements while main
     *   **Firebase Storage**: Secure cloud backup for high-resolution receipt images.
 *   **Local Notifications**: Implements an automated reminder system using `flutter_local_notifications` to alert users 30 days before a warranty expires.
 *   **Hardware Resource (Camera)**: Direct integration with the device camera to capture and digitize physical receipts on the spot.
+*   **Security & Best Practices**:
+    *   **Firebase Security Rules**: Implements strict data isolation to ensure users can only access their own files.
+    *   **Automated Testing**: Includes unit tests for core data models to ensure data integrity and stability.
+
 
 ---
 
