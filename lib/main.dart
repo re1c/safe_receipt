@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'data/services/notification_service.dart';
 import 'providers/auth_provider.dart';
 import 'providers/receipt_provider.dart';
@@ -17,8 +18,10 @@ void main() async {
     );
   } catch (e) {
     print("Firebase initialization failed: $e");
-    print("Please run 'flutterfire configure' to set up Firebase.");
   }
+
+  // Request Notification Permission for Android 13+
+  await Permission.notification.request();
 
   await NotificationService().init();
 
