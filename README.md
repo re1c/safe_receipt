@@ -15,17 +15,15 @@ Demo lengkap fitur aplikasi dapat dilihat pada file berikut:
 
 ---
 
-## 🎯 Pemenuhan Kriteria Tugas
-Aplikasi ini telah mengimplementasikan seluruh kriteria penilaian dengan rincian teknis sebagai berikut:
+## Ringkasan Implementasi Teknis
+Aplikasi ini dikembangkan dengan mengintegrasikan beberapa komponen utama sesuai dengan kebutuhan fungsional sistem:
 
-| Kriteria | Bobot | Implementasi Teknis | Status |
-| :--- | :---: | :--- | :---: |
-| **Relational Database (CRUD)** | 10% | Local persistence menggunakan **SQLite (sqflite)** dengan operasi Create, Read, Update, dan Delete yang lengkap. | ✅ |
-| **Firebase Authentication** | 5% | Sistem Login dan Register menggunakan **Firebase Auth** (Email & Password). | ✅ |
-| **Firebase Storing** | 5% | Sinkronisasi metadata ke **Cloud Firestore** dan penyimpanan foto struk ke **Firebase Storage**. | ✅ |
-| **Notifications** | 5% | Pengingat otomatis masa garansi (H-30) menggunakan **flutter_local_notifications**. | ✅ |
-| **Smartphone Resource** | 5% | Integrasi **Camera & Gallery** menggunakan paket `image_picker`. | ✅ |
-| **Demo & GitHub** | 10% | Repositori terstruktur rapi, kode bersih, dan video demo tersedia. | ✅ |
+- **Persistensi Data Lokal (Relational)**: Menggunakan **SQLite** (`sqflite`) untuk menyimpan riwayat aset secara permanen di perangkat, mencakup operasi pembuatan, pembacaan, pembaruan, hingga penghapusan data (CRUD).
+- **Sistem Autentikasi**: Mengintegrasikan **Firebase Authentication** untuk mengelola akses pengguna secara aman melalui metode Email dan Password.
+- **Penyimpanan Cloud**: Memanfaatkan **Cloud Firestore** untuk sinkronisasi metadata aset dan **Firebase Storage** untuk pencadangan foto struk secara daring.
+- **Layanan Pengingat**: Menggunakan **Local Notifications** untuk memberikan peringatan kepada pengguna sebelum masa garansi aset berakhir (penjadwalan otomatis).
+- **Integrasi Hardware**: Memanfaatkan **Resource Kamera** melalui paket `image_picker` untuk proses digitalisasi dokumen fisik secara langsung.
+- **Dokumentasi Proyek**: Seluruh kode sumber dikelola secara terstruktur di GitHub dan dilengkapi dengan video demonstrasi untuk menunjukkan alur kerja aplikasi secara menyeluruh.
 
 ---
 
