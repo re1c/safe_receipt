@@ -44,7 +44,7 @@ class SafeReceiptApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.deepPurple,
+            seedColor: const Color(0xFF9D50FF),
             brightness: Brightness.light,
           ),
           appBarTheme: const AppBarTheme(
@@ -55,11 +55,21 @@ class SafeReceiptApp extends StatelessWidget {
         darkTheme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.deepPurple,
+            seedColor: const Color(0xFF9D50FF),
             brightness: Brightness.dark,
+            surface: const Color(0xFF0F0B1E),
+          ),
+          cardTheme: CardThemeData(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: BorderSide(color: Colors.white.withValues(alpha: 0.05)),
+            ),
+            color: const Color(0xFF1A1433),
           ),
           appBarTheme: const AppBarTheme(
             centerTitle: true,
+            backgroundColor: Colors.transparent,
             elevation: 0,
           ),
         ),

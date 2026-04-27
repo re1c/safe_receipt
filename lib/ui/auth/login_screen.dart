@@ -59,15 +59,27 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.security, size: 80, color: Colors.deepPurple),
+                Icon(
+                  Icons.shield_rounded,
+                  size: 80,
+                  color: theme.colorScheme.primary,
+                ),
                 const SizedBox(height: 24),
                 Text(
                   'SafeReceipt',
                   style: theme.textTheme.headlineLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: theme.colorScheme.primary,
+                    letterSpacing: 1.5,
                   ),
                 ),
+                Text(
+                  'Secure Your Warranty Vault',
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                  ),
+                ),
+                const SizedBox(height: 48),
                 Text(
                   _isLogin ? 'Welcome back!' : 'Create your account',
                   style: theme.textTheme.bodyLarge,
