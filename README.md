@@ -1,5 +1,16 @@
-# SafeReceipt
-### *Digital E-Warranty Vault & Receipt Manager*
+# SafeReceipt: Digital E-Warranty Vault 🛡️
+
+[![Project Demo](https://img.shields.io/badge/Demo-Video-blueviolet?style=for-the-badge&logo=youtube)](demo_video_246.mp4)
+
+SafeReceipt adalah solusi manajemen aset digital yang dirancang untuk mendigitalisasi struk fisik dan mengelola masa garansi secara cerdas. Proyek ini dikembangkan sebagai Mini Project mata kuliah Pemrograman Perangkat Bergerak (ITS).
+
+---
+
+### 📺 Video Demo
+Anda dapat melihat demo lengkap fitur aplikasi langsung di dalam repositori ini:
+👉 **[Lihat Video Demo (demo_video_246.mp4)](demo_video_246.mp4)**
+
+---
 
 SafeReceipt is a mobile utility designed to bridge the gap between physical receipts and digital asset management. Built for the **Mobile Programming Mini Project**, this application serves as a secure vault for digitizing thermal receipts and tracking warranty periods to prevent loss of claims due to faded or lost physical documents.
 
