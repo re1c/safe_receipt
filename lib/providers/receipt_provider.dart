@@ -104,6 +104,19 @@ class ReceiptProvider with ChangeNotifier {
     }
   }
 
+  Future<void> deleteMultipleReceipts(List<String> ids) async {
+    for (String id in ids) {
+      await _dbHelper.deleteReceipt(id);
+      await _notificationService.cancelNotification(id.hashCode);
+      try {
+        await _firebaseService.deleteReceiptFromCloud(id);
+      } catch (e) {
+        debugPrint("Delete Cloud Failed for $id: $e");
+      }
+    }
+    await loadReceipts();
+  }
+
   List<ReceiptModel> searchReceipts(String query) {
     if (query.isEmpty) return _receipts;
     return _receipts.where((r) {

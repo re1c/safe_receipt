@@ -16,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String _searchQuery = '';
   final _searchController = TextEditingController();
+  final Set<String> _selectedIds = {};
 
   @override
   void initState() {
@@ -23,6 +24,22 @@ class _HomeScreenState extends State<HomeScreen> {
     Future.microtask(
       () => Provider.of<ReceiptProvider>(context, listen: false).loadReceipts(),
     );
+  }
+
+  void _toggleSelection(String id) {
+    setState(() {
+      if (_selectedIds.contains(id)) {
+        _selectedIds.remove(id);
+      } else {
+        _selectedIds.add(id);
+      }
+    });
+  }
+
+  void _clearSelection() {
+    setState(() {
+      _selectedIds.clear();
+    });
   }
 
   @override
@@ -35,12 +52,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SafeReceipt Vault'),
+        title: _selectedIds.isEmpty 
+          ? const Text('SafeReceipt Vault')
+          : Text('${_selectedIds.length} Selected'),
+        leading: _selectedIds.isEmpty ? null : IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: _clearSelection,
+        ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.logout_rounded),
-            onPressed: () => _showLogoutDialog(context, authProvider),
-          ),
+          if (_selectedIds.isEmpty)
+            IconButton(
+              icon: const Icon(Icons.logout_rounded),
+              onPressed: () => _showLogoutDialog(context, authProvider),
+            )
+          else
+            IconButton(
+              icon: const Icon(Icons.delete_outline, color: Colors.red),
+              onPressed: () => _showDeleteMultipleDialog(context, receiptProvider),
+            ),
         ],
       ),
       body: Column(
@@ -73,14 +102,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: _selectedIds.isEmpty ? FloatingActionButton.extended(
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => const ReceiptForm()),
         ),
         label: const Text('Digitize Receipt'),
         icon: const Icon(Icons.camera_rounded),
-      ),
+      ) : null,
     );
   }
 
@@ -98,6 +127,28 @@ class _HomeScreenState extends State<HomeScreen> {
               auth.signOut();
             },
             child: const Text('Logout', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showDeleteMultipleDialog(BuildContext context, ReceiptProvider provider) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Delete Selected'),
+        content: Text('Are you sure you want to delete ${_selectedIds.length} items?'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(ctx);
+              final idsToDelete = _selectedIds.toList();
+              _clearSelection();
+              await provider.deleteMultipleReceipts(idsToDelete);
+            },
+            child: const Text('Delete All', style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -130,6 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
       itemCount: displayedReceipts.length,
       itemBuilder: (context, index) {
         final receipt = displayedReceipts[index];
+        final isSelected = _selectedIds.contains(receipt.id);
         final daysToExpiry = receipt.expiryDate.difference(DateTime.now()).inDays;
         final isExpiringSoon = daysToExpiry < 30;
         final isExpired = daysToExpiry < 0;
@@ -137,27 +189,53 @@ class _HomeScreenState extends State<HomeScreen> {
         return Card(
           margin: const EdgeInsets.only(bottom: 12),
           clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: isSelected 
+              ? BorderSide(color: theme.colorScheme.primary, width: 2)
+              : BorderSide.none,
+          ),
+          color: isSelected ? theme.colorScheme.primaryContainer.withValues(alpha: 0.1) : null,
           child: InkWell(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => ReceiptForm(receipt: receipt)),
-            ),
+            onLongPress: () => _toggleSelection(receipt.id),
+            onTap: () {
+              if (_selectedIds.isNotEmpty) {
+                _toggleSelection(receipt.id);
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => ReceiptForm(receipt: receipt)),
+                );
+              }
+            },
             child: Row(
               children: [
-                Hero(
-                  tag: 'img-${receipt.id}',
-                  child: Image.file(
-                    File(receipt.imagePath),
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(
-                      width: 100,
-                      height: 100,
-                      color: theme.colorScheme.surfaceContainerHighest,
-                      child: const Icon(Icons.broken_image_rounded),
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Hero(
+                      tag: 'img-${receipt.id}',
+                      child: Image.file(
+                        File(receipt.imagePath),
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) => Container(
+                          width: 100,
+                          height: 100,
+                          color: theme.colorScheme.surfaceContainerHighest,
+                          child: const Icon(Icons.broken_image_rounded),
+                        ),
+                      ),
                     ),
-                  ),
+                    if (isSelected)
+                      Container(
+                        width: 100,
+                        height: 100,
+                        color: theme.colorScheme.primary.withValues(alpha: 0.4),
+                        child: const Icon(Icons.check_circle, color: Colors.white, size: 32),
+                      ),
+                  ],
                 ),
                 Expanded(
                   child: Padding(
