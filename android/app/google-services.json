@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1082893682446",
+    "project_id": "fir-crud-basics-5fd25",
+    "storage_bucket": "fir-crud-basics-5fd25.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082893682446:android:3ad24cd7689e9e8456f95f",
+        "android_client_info": {
+          "package_name": "com.example.firebase_crud_basics"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQUsfb8B4Rngf69n_wG6ygL-S2raF_f4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082893682446:android:11396601a2653c2d56f95f",
+        "android_client_info": {
+          "package_name": "com.naswan.safereceipt.safe_receipt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQUsfb8B4Rngf69n_wG6ygL-S2raF_f4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
