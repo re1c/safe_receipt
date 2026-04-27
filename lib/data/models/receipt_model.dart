@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class ReceiptModel {
   final String id;
   final String userId;

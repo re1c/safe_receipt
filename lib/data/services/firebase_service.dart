@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -16,7 +17,7 @@ class FirebaseService {
     try {
       return await _auth.createUserWithEmailAndPassword(email: email, password: password);
     } catch (e) {
-      print("SignUp Error: $e");
+      debugPrint("SignUp Error: $e");
       rethrow;
     }
   }
@@ -25,7 +26,7 @@ class FirebaseService {
     try {
       return await _auth.signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
-      print("SignIn Error: $e");
+      debugPrint("SignIn Error: $e");
       rethrow;
     }
   }
@@ -52,7 +53,7 @@ class FirebaseService {
       final receiptData = receipt.copyWith(userId: user.uid, imagePath: cloudImageUrl).toFirestore();
       await _firestore.collection('receipts').doc(receipt.id).set(receiptData);
     } catch (e) {
-      print("Sync Error: $e");
+      debugPrint("Sync Error: $e");
       rethrow;
     }
   }
@@ -65,7 +66,7 @@ class FirebaseService {
       await _firestore.collection('receipts').doc(receiptId).delete();
       await _storage.ref().child('receipts/${user.uid}/$receiptId.jpg').delete();
     } catch (e) {
-      print("Delete Cloud Error: $e");
+      debugPrint("Delete Cloud Error: $e");
     }
   }
 }

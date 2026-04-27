@@ -84,6 +84,6 @@ class DatabaseHelper {
 
   Future close() async {
     final db = await instance.database;
-    db.close();
+    await db.close();
   }
 }

@@ -21,7 +21,7 @@ class NotificationService {
     );
 
     await flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
+      settings: initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse response) {
         // Handle notification click
       },
@@ -34,17 +34,15 @@ class NotificationService {
     final reminderDate = expiryDate.subtract(const Duration(days: 30));
     
     if (reminderDate.isBefore(DateTime.now())) {
-      // If expiry is less than 30 days away, remind tomorrow morning
-      // or skip if already expired.
       return;
     }
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
-      id,
-      'Warranty Reminder: $title',
-      'Your warranty for $title will expire in 30 days.',
-      tz.TZDateTime.from(reminderDate, tz.local),
-      const NotificationDetails(
+      id: id,
+      title: 'Warranty Reminder: $title',
+      body: 'Your warranty for $title will expire in 30 days.',
+      scheduledDate: tz.TZDateTime.from(reminderDate, tz.local),
+      notificationDetails: const NotificationDetails(
         android: AndroidNotificationDetails(
           'warranty_reminder_channel',
           'Warranty Reminders',
@@ -54,12 +52,10 @@ class NotificationService {
         ),
       ),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
     );
   }
 
   Future<void> cancelNotification(int id) async {
-    await flutterLocalNotificationsPlugin.cancel(id);
+    await flutterLocalNotificationsPlugin.cancel(id: id);
   }
 }

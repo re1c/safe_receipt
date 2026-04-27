@@ -142,7 +142,7 @@ class _ReceiptFormState extends State<ReceiptForm> {
                     height: 220,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: theme.colorScheme.surfaceVariant,
+                      color: theme.colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: theme.colorScheme.outlineVariant),
                     ),
@@ -196,7 +196,7 @@ class _ReceiptFormState extends State<ReceiptForm> {
                       controller: _priceController,
                       decoration: InputDecoration(
                         labelText: 'Price',
-                        prefixText: '$ ',
+                        prefixText: r'$ ',
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                       ),
                       keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -207,7 +207,7 @@ class _ReceiptFormState extends State<ReceiptForm> {
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<String>(
-                value: _category,
+                initialValue: _category,
                 decoration: InputDecoration(
                   labelText: 'Category',
                   prefixIcon: const Icon(Icons.category_outlined),
@@ -219,7 +219,7 @@ class _ReceiptFormState extends State<ReceiptForm> {
               const SizedBox(height: 24),
               Card(
                 elevation: 0,
-                color: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+                color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 child: ListTile(
                   leading: const Icon(Icons.event_available_outlined),

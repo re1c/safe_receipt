@@ -18,8 +18,8 @@ class ReceiptProvider with ChangeNotifier {
 
   ReceiptProvider() {
     // Listen for connectivity changes to trigger sync
-    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      if (result != ConnectivityResult.none) {
+    Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> results) {
+      if (results.isNotEmpty && results.first != ConnectivityResult.none) {
         syncPendingReceipts();
       }
     });
@@ -40,7 +40,7 @@ class ReceiptProvider with ChangeNotifier {
         await _firebaseService.syncReceiptToCloud(receipt);
         await _dbHelper.markAsSynced(receipt.id);
       } catch (e) {
-        print("Background Sync Failed for ${receipt.id}: $e");
+        debugPrint("Background Sync Failed for ${receipt.id}: $e");
       }
     }
     await loadReceipts();
@@ -63,7 +63,7 @@ class ReceiptProvider with ChangeNotifier {
       await _dbHelper.markAsSynced(receipt.id);
       await loadReceipts();
     } catch (e) {
-      print("Initial Sync Failed: $e");
+      debugPrint("Initial Sync Failed: $e");
     }
   }
 
@@ -85,7 +85,7 @@ class ReceiptProvider with ChangeNotifier {
       await _dbHelper.markAsSynced(receipt.id);
       await loadReceipts();
     } catch (e) {
-      print("Sync Update Failed: $e");
+      debugPrint("Sync Update Failed: $e");
     }
   }
 
@@ -100,7 +100,7 @@ class ReceiptProvider with ChangeNotifier {
     try {
       await _firebaseService.deleteReceiptFromCloud(id);
     } catch (e) {
-      print("Delete Cloud Failed: $e");
+      debugPrint("Delete Cloud Failed: $e");
     }
   }
 
