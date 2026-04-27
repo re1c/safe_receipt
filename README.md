@@ -1,55 +1,70 @@
-# SafeReceipt - Digital E-Warranty Vault
+# SafeReceipt
+### *Digital E-Warranty Vault & Receipt Manager*
 
-SafeReceipt is a professional Flutter application designed for managing digital receipts and warranty information. This project was developed as a Mini Project for the Mobile Programming course.
+SafeReceipt is a mobile utility designed to bridge the gap between physical receipts and digital asset management. Built for the **Mobile Programming Mini Project**, this application serves as a secure vault for digitizing thermal receipts and tracking warranty periods to prevent loss of claims due to faded or lost physical documents.
 
-## 🚀 Features & Requirements
+---
 
-- **CRUD with Relational Database (10%)**: Implemented using **SQLite** (`sqflite`) for high-performance local storage of receipt data.
-- **Firebase Authentication (5%)**: Secure login and registration system using **Firebase Auth**.
-- **Storing Data in Firebase (5%)**: 
-  - **Firestore**: Syncs receipt metadata (title, price, dates) to the cloud.
-  - **Firebase Storage**: Automatically backs up receipt photos to secure cloud storage.
-- **Notifications (5%)**: Integrated **Local Notifications** to remind users 30 days before a warranty expires.
-- **Smartphone Resource (5%)**: Leverages the **Camera** to digitize physical thermal receipts.
-- **Premium UI**: Modern Material 3 design with Dark Mode support and smooth transitions.
+## 📋 Project Requirements Fulfillment
 
-## 🛠️ Tech Stack
+This project is built to strictly adhere to the academic requirements while maintaining industry-standard practices:
 
-- **Framework**: Flutter
-- **State Management**: Provider
-- **Local DB**: SQLite (sqflite)
-- **Backend**: Firebase (Auth, Firestore, Storage)
-- **Utilities**: camera, image_picker, flutter_local_notifications, intl, uuid
+*   **Relational Database (CRUD)**: Utilizes **SQLite** (`sqflite`) for robust local persistence, handling the complete lifecycle of receipt data including complex date relations for warranty tracking.
+*   **Firebase Authentication**: Implements a secure user gateway with email/password authentication, ensuring that each user's vault is private and protected.
+*   **Firebase Cloud Integration**: 
+    *   **Cloud Firestore**: Real-time synchronization of receipt metadata across devices.
+    *   **Firebase Storage**: Secure cloud backup for high-resolution receipt images.
+*   **Local Notifications**: Implements an automated reminder system using `flutter_local_notifications` to alert users 30 days before a warranty expires.
+*   **Hardware Resource (Camera)**: Direct integration with the device camera to capture and digitize physical receipts on the spot.
 
-## ⚙️ Configuration Instructions (MANDATORY)
+---
 
-To make the app 100% functional, please follow these steps:
+## ✨ Features & User Experience
 
-1.  **Initialize Firebase**:
-    -   Go to [Firebase Console](https://console.firebase.google.com/).
-    -   Create a new project named `SafeReceipt`.
-    -   In your terminal, inside the `safe_receipt` directory, run:
-        ```bash
-        flutterfire configure
-        ```
-    -   Follow the prompts to link the app.
+*   **Smart Dashboard**: A clean overview of all stored assets with visual indicators for items nearing warranty expiration.
+*   **Digitization Engine**: Capture receipts instantly. The app handles local storage first to ensure functionality in low-signal areas, with background cloud sync.
+*   **Categorization**: Organize assets by category (Electronics, Appliances, Fashion, etc.) for easier management.
+*   **Automated Reminders**: Never miss a warranty claim. The app proactively calculates and schedules reminders based on your purchase and expiry dates.
+*   **Premium Dark Mode**: Full support for system-wide themes with a modern Material 3 aesthetic.
 
-2.  **Enable Services in Firebase Console**:
-    -   **Authentication**: Enable Email/Password provider.
-    -   **Firestore Database**: Create a database in Test Mode or production.
-    -   **Storage**: Enable Firebase Storage.
+---
 
-3.  **Run the App**:
+## 🛠️ Technical Implementation
+
+The application architecture is designed for scalability and maintainability:
+
+*   **State Management**: Powered by **Provider**, ensuring a reactive UI and clean separation between business logic and the view layer.
+*   **Service Pattern**: Dedicated services for Database, Firebase, and Notifications to follow the Single Responsibility Principle.
+*   **Data Consistency**: Implements a "Local-First" strategy where data is committed to the SQLite database before attempting cloud synchronization, ensuring no data loss.
+
+---
+
+## ⚙️ Quick Setup
+
+To run this project locally, ensure you have the Flutter SDK installed and follow these steps:
+
+1.  **Clone & Install**:
+    ```bash
+    git clone https://github.com/re1c/safe_receipt.git
+    cd safe_receipt
+    flutter pub get
+    ```
+
+2.  **Firebase Configuration**:
+    Since Firebase configuration is environment-specific, you will need to link your own Firebase project:
+    ```bash
+    flutterfire configure
+    ```
+    *Note: Ensure Authentication (Email), Firestore, and Storage are enabled in your Firebase console.*
+
+3.  **Run**:
     ```bash
     flutter run
     ```
 
-## 📂 Project Structure
-
-- `lib/data/models`: Data structures.
-- `lib/data/services`: Database, Firebase, and Notification logic.
-- `lib/providers`: State management using Provider pattern.
-- `lib/ui`: All screens (Auth, Home, Receipt Form).
-
 ---
-Developed with ❤️ by Naswan Nashir Ramadhan (5025231246)
+
+**Developed by:**  
+**Naswan Nashir Ramadhan**  
+NRP: 5025231246  
+*Department of Informatics, Institut Teknologi Sepuluh Nopember*
